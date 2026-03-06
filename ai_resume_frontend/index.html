@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Resume Studio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <!-- ───── Animated Background ───── -->
+  <div class="bg-animation">
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <div class="circle circle-3"></div>
+    <div class="circle circle-4"></div>
+    <div class="circle circle-5"></div>
+  </div>
+
+  <!-- ───── Top Navigation ───── -->
+  <header class="topbar">
+    <div class="logo">
+      <span class="logo-icon">⚡</span> AI Resume Studio
+    </div>
+    <span class="badge">SaaS Beta</span>
+  </header>
+
+  <!-- ───── Main Two-Column Layout ───── -->
+  <main class="container">
+    <!-- ========== LEFT: Form Panel ========== -->
+    <section class="panel form-panel">
+      <!-- ── Tab Navigation ── -->
+      <div class="tab-bar">
+        <button class="tab-btn active" data-tab="resume">Resume</button>
+        <button class="tab-btn" data-tab="coverLetter">Cover Letter</button>
+      </div>
+
+      <!-- ════════ TAB: Resume ════════ -->
+      <div class="tab-content active" id="tab-resume">
+      <h2 class="panel-title">Build Your Resume</h2>
+      <p class="panel-subtitle">Fill in your details and let AI craft a professional resume for you.</p>
+
+      <form id="resumeForm" autocomplete="off">
+        <!-- Name -->
+        <div class="field">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="e.g. Jane Doe" required />
+        </div>
+
+        <!-- Contact Info Grid -->
+        <div class="field-grid">
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="e.g. jane@example.com" required />
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" name="phone" placeholder="e.g. +1 234 567 8900" required />
+          </div>
+          <div class="field">
+            <label for="linkedin">LinkedIn URL</label>
+            <input type="url" id="linkedin" name="linkedin" placeholder="e.g. https://linkedin.com/in/janedoe" />
+          </div>
+          <div class="field">
+            <label for="github">GitHub URL</label>
+            <input type="url" id="github" name="github" placeholder="e.g. https://github.com/janedoe" />
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="field">
+          <label for="skills">Skills <span class="hint">(comma separated)</span></label>
+          <input type="text" id="skills" name="skills" placeholder="e.g. Python, React, SQL" required />
+        </div>
+
+        <!-- Experience -->
+        <div class="field">
+          <label for="experience">Experience</label>
+          <textarea id="experience" name="experience" rows="4"
+            placeholder="e.g. 3 years as Full-Stack Developer at Acme Corp…" required></textarea>
+        </div>
+
+        <!-- Education -->
+        <div class="field">
+          <label for="education">Education</label>
+          <textarea id="education" name="education" rows="3"
+            placeholder="e.g. B.Tech Computer Science, XYZ University, 2021" required></textarea>
+        </div>
+
+        <!-- Target Job -->
+        <div class="field">
+          <label for="target_job">Target Job Title</label>
+          <input type="text" id="target_job" name="target_job" placeholder="e.g. Senior Frontend Engineer" required />
+        </div>
+
+        <!-- Job Description -->
+        <div class="field">
+          <label for="job_description">Job Description</label>
+          <textarea id="job_description" name="job_description" rows="4"
+            placeholder="Paste the job listing here…" required></textarea>
+        </div>
+
+        <!-- Projects -->
+        <div class="field">
+          <label for="projects">Projects</label>
+          <textarea id="projects" name="projects" rows="3" placeholder="e.g. Built a portfolio site using React…"></textarea>
+        </div>
+
+        <!-- Internships -->
+        <div class="field">
+          <label for="internships">Internships</label>
+          <textarea id="internships" name="internships" rows="3" placeholder="e.g. Summer intern at Google…"></textarea>
+        </div>
+
+        <!-- Certifications -->
+        <div class="field">
+          <label for="certifications">Certifications</label>
+          <textarea id="certifications" name="certifications" rows="3" placeholder="e.g. AWS Certified Solutions Architect…"></textarea>
+        </div>
+
+        <!-- Achievements -->
+        <div class="field">
+          <label for="achievements">Achievements</label>
+          <textarea id="achievements" name="achievements" rows="3" placeholder="e.g. Won first place in XYZ hackathon…"></textarea>
+        </div>
+
+        <!-- Tools -->
+        <div class="field">
+          <label for="tools">Tools</label>
+          <textarea id="tools" name="tools" rows="2" placeholder="e.g. Docker, Git, VS Code, Figma…"></textarea>
+        </div>
+
+        <!-- Competitive Programming -->
+        <div class="field">
+          <label for="competitive_programming">Competitive Programming</label>
+          <textarea id="competitive_programming" name="competitive_programming" rows="2" placeholder="e.g. Codeforces 1600+, LeetCode 300+ solved…"></textarea>
+        </div>
+
+        <!-- Extracurriculars -->
+        <div class="field">
+          <label for="extracurriculars">Extracurriculars</label>
+          <textarea id="extracurriculars" name="extracurriculars" rows="2" placeholder="e.g. President of Coding Club…"></textarea>
+        </div>
+
+        <!-- Template -->
+        <div class="field">
+          <label for="template">Resume Template</label>
+          <div class="template-selector">
+            <label class="template-option selected" data-value="classic">
+              <input type="radio" name="template" value="classic" checked />
+              <span class="template-card">
+                <span class="template-icon">📄</span>
+                <span>Classic</span>
+              </span>
+            </label>
+            <label class="template-option" data-value="modern">
+              <input type="radio" name="template" value="modern" />
+              <span class="template-card">
+                <span class="template-icon">🎨</span>
+                <span>Modern</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn-generate" id="generateBtn">
+          <span class="btn-text">Generate Resume</span>
+          <span class="spinner hidden" id="spinner"></span>
+        </button>
+      </form>
+      </div><!-- /tab-resume -->
+
+      <!-- ════════ TAB: Cover Letter ════════ -->
+      <div class="tab-content" id="tab-coverLetter">
+        <h2 class="panel-title">Generate Cover Letter</h2>
+        <p class="panel-subtitle">Provide your details and let AI write a tailored cover letter.</p>
+
+        <form id="coverLetterForm" autocomplete="off">
+          <div class="field">
+            <label for="cl_name">Full Name</label>
+            <input type="text" id="cl_name" name="cl_name" placeholder="e.g. Jane Doe" required />
+          </div>
+          <div class="field">
+            <label for="cl_target_job">Target Job Title</label>
+            <input type="text" id="cl_target_job" name="cl_target_job" placeholder="e.g. Senior Frontend Engineer" required />
+          </div>
+          <div class="field">
+            <label for="cl_company">Company</label>
+            <input type="text" id="cl_company" name="cl_company" placeholder="e.g. Google" required />
+          </div>
+          <div class="field">
+            <label for="cl_hiring_manager">Hiring Manager</label>
+            <input type="text" id="cl_hiring_manager" name="cl_hiring_manager" placeholder="e.g. John Smith (or leave blank)" />
+          </div>
+          <div class="field">
+            <label for="cl_job_description">Job Description</label>
+            <textarea id="cl_job_description" name="cl_job_description" rows="4" placeholder="Paste the job listing here…" required></textarea>
+          </div>
+          <div class="field">
+            <label for="cl_summary">Professional Summary</label>
+            <textarea id="cl_summary" name="cl_summary" rows="3" placeholder="Brief professional summary…" required></textarea>
+          </div>
+          <div class="field">
+            <label for="cl_experience">Experience</label>
+            <textarea id="cl_experience" name="cl_experience" rows="4" placeholder="e.g. 3 years as Full-Stack Developer…" required></textarea>
+          </div>
+          <div class="field">
+            <label for="cl_skills">Skills <span class="hint">(comma separated)</span></label>
+            <input type="text" id="cl_skills" name="cl_skills" placeholder="e.g. Python, React, SQL" required />
+          </div>
+
+          <button type="submit" class="btn-generate btn-generate-cl" id="generateCLBtn">
+            <span class="btn-text">Generate Cover Letter</span>
+            <span class="spinner hidden" id="clSpinner"></span>
+          </button>
+        </form>
+      </div><!-- /tab-coverLetter -->
+    </section>
+
+    <!-- ========== RIGHT: Preview Panel ========== -->
+    <section class="panel preview-panel">
+      <div class="preview-header">
+        <h2 class="panel-title">Live Preview</h2>
+        <div class="download-buttons hidden" id="downloadButtons">
+          <button class="btn-download" id="downloadResumeBtn">⬇ Resume PDF</button>
+          <button class="btn-download btn-download-cover" id="downloadCoverBtn">⬇ Download Cover Letter PDF</button>
+        </div>
+      </div>
+
+      <!-- Empty state -->
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">📝</div>
+        <p>Your AI-generated resume will appear here.</p>
+      </div>
+
+      <!-- ATS Score Card (hidden by default) -->
+      <div id="atsCard" class="ats-score-card" style="display:none;">
+        <div class="ats-score-card-title">ATS Score</div>
+        <div class="ats-score-card-value" id="atsScoreValue">0%</div>
+        <div class="ats-score-card-bar">
+          <div class="ats-score-card-bar-fill" id="atsProgressBar"></div>
+        </div>
+      </div>
+
+      <!-- Generated resume content (hidden initially) -->
+      <div class="resume-content hidden" id="resumeContent">
+
+        <!-- ── Overleaf-style Resume Template ── -->
+        <div id="resumeTemplate" class="resume-card">
+          <div class="resume-header">
+            <h1 id="r_name"></h1>
+            <div id="r_title"></div>
+            <div id="r_contact" class="resume-contact"></div>
+          </div>
+          <hr/>
+          <section id="sec_summary">
+            <h2>SUMMARY</h2>
+            <p id="r_summary"></p>
+          </section>
+          <section id="sec_experience">
+            <h2>EXPERIENCE</h2>
+            <div id="r_experience"></div>
+          </section>
+          <section id="sec_projects">
+            <h2>PROJECTS</h2>
+            <div id="r_projects"></div>
+          </section>
+          <section id="sec_education">
+            <h2>EDUCATION</h2>
+            <p id="r_education"></p>
+          </section>
+          <section id="sec_skills">
+            <h2>SKILLS</h2>
+            <p id="r_skills"></p>
+          </section>
+          <section id="sec_internships">
+            <h2>INTERNSHIPS</h2>
+            <div id="r_internships"></div>
+          </section>
+          <section id="sec_certifications">
+            <h2>CERTIFICATIONS</h2>
+            <div id="r_certifications"></div>
+          </section>
+          <section id="sec_achievements">
+            <h2>ACHIEVEMENTS</h2>
+            <div id="r_achievements"></div>
+          </section>
+          <section id="sec_tools">
+            <h2>TOOLS &amp; PLATFORMS</h2>
+            <p id="r_tools"></p>
+          </section>
+          <section id="sec_extracurriculars">
+            <h2>EXTRACURRICULARS</h2>
+            <div id="r_extracurriculars"></div>
+          </section>
+          <section id="sec_cover" style="display:none;">
+            <h2>COVER LETTER</h2>
+            <div id="r_cover"></div>
+          </section>
+        </div>
+
+        <!-- ── ATS Collapsible ── -->
+        <div class="ats-collapsible" id="atsCollapsible">
+          <button class="ats-toggle" id="atsToggle" type="button">
+            <span>ATS Compatibility Score</span>
+            <span class="ats-chevron" id="atsChevron">▸</span>
+          </button>
+          <div class="ats-body hidden" id="atsBody">
+            <div class="ats-bar-wrapper">
+              <div class="ats-bar">
+                <div class="ats-bar-fill" id="atsBarFill"></div>
+              </div>
+              <span class="ats-score-label" id="atsScoreLabel">0%</span>
+            </div>
+            <div class="ats-keywords-wrapper" id="keywordsWrapper">
+              <p class="ats-kw-label">Missing Keywords:</p>
+              <div class="ats-kw-tags" id="resMissingKeywords"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ───── Toast Notification ───── -->
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
