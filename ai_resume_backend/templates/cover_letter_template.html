@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cover Letter</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 10.5px;
+            line-height: 1.4;
+            color: #000;
+            background: #fff;
+            padding: 22px 32px 14px 32px;
+        }
+
+        /* ─────────────── Sender header ─────────────── */
+        .sender-block {
+            margin-bottom: 4px;
+        }
+
+        .sender-name {
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 1px;
+        }
+
+        .sender-contact {
+            font-size: 9.5px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 1px;
+        }
+
+        .sender-address {
+            font-size: 9.5px;
+            color: #333;
+        }
+
+        .header-rule {
+            border: none;
+            border-top: 1px solid #000;
+            margin: 5px 0 4px 0;
+        }
+
+        /* ─────────────── Date ─────────────── */
+        .date-line {
+            font-size: 10.5px;
+            margin-bottom: 6px;
+        }
+
+        /* ─────────────── Employer block ─────────────── */
+        .employer-block {
+            margin-bottom: 6px;
+        }
+
+        .employer-block p {
+            font-size: 10.5px;
+            line-height: 1.3;
+        }
+
+        /* ─────────────── Body ─────────────── */
+        .cover-letter-content {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .cover-letter-content p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════════ SENDER HEADER ═══════════════ -->
+    {% if name %}
+    <div class="sender-block">
+        <div class="sender-name">{{ name }}</div>
+        {% set contact_parts = [] %}
+        {% if email %}{% set _ = contact_parts.append(email) %}{% endif %}
+        {% if phone %}{% set _ = contact_parts.append(phone) %}{% endif %}
+        {% if linkedin %}{% set _ = contact_parts.append(linkedin) %}{% endif %}
+        {% if contact_parts %}
+            <div class="sender-contact">{{ contact_parts | join(" | ") }}</div>
+        {% endif %}
+        {% if address %}
+            <div class="sender-address">{{ address }}</div>
+        {% endif %}
+        {% if city_state_zip %}
+            <div class="sender-address">{{ city_state_zip }}</div>
+        {% endif %}
+    </div>
+    <hr class="header-rule">
+    {% endif %}
+
+    <!-- ═══════════════ DATE ═══════════════ -->
+    {% if date %}
+        <div class="date-line">{{ date }}</div>
+    {% endif %}
+
+    <!-- ═══════════════ EMPLOYER BLOCK ═══════════════ -->
+    {% if hiring_manager or company or company_address or company_city_state %}
+    <div class="employer-block">
+        {% if hiring_manager %}
+            <p><strong>{{ hiring_manager }}</strong></p>
+        {% endif %}
+        {% if company %}
+            <p>{{ company }}</p>
+        {% endif %}
+        {% if company_address %}
+            <p>{{ company_address }}</p>
+        {% endif %}
+        {% if company_city_state %}
+            <p>{{ company_city_state }}</p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <!-- ═══════════════ COVER LETTER BODY ═══════════════ -->
+    <div class="cover-letter-content">
+        {% for paragraph in cover_letter.split('\n\n') %}
+            <p>{{ paragraph }}</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

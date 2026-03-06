@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }} – Resume</title>
+    <style>
+        /* ───────────────────────────── Base ───────────────────────────── */
+        @page {
+            size: A4;
+            margin: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 10.5px;
+            line-height: 1.4;
+            color: #2c2c2c;
+            background: #fff;
+            padding: 30px 40px;
+        }
+
+        /* ───────────────────────────── Header ─────────────────────────── */
+        .header {
+            text-align: left;
+            padding-bottom: 8px;
+            border-bottom: 2.5px solid #1a73e8;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a73e8;
+            letter-spacing: 0.5px;
+            margin-bottom: 1px;
+        }
+
+        .header .target-job {
+            font-size: 11px;
+            color: #555;
+            margin-bottom: 4px;
+        }
+
+        .contact-line {
+            font-size: 9.5px;
+            color: #444;
+            margin-bottom: 4px;
+        }
+
+        .header p.summary {
+            font-size: 10px;
+            line-height: 1.4;
+            color: #333;
+            margin-top: 4px;
+        }
+
+        /* ───────────────────────────── Sections ───────────────────────── */
+        .section {
+            margin-top: 10px;
+        }
+
+        .section h2 {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #1a73e8;
+            border-bottom: 1px solid #c0c0c0;
+            padding-bottom: 2px;
+            margin-bottom: 6px;
+        }
+
+        /* ───────────── Experience / Projects / Internships ────────────── */
+        .entry {
+            margin-bottom: 6px;
+        }
+
+        .entry-row {
+            width: 100%;
+        }
+
+        .entry-row td {
+            vertical-align: baseline;
+        }
+
+        .entry-row .title {
+            font-weight: 700;
+            font-size: 10.5px;
+            color: #1a1a1a;
+            text-align: left;
+        }
+
+        .entry-row .meta {
+            font-size: 9.5px;
+            color: #666;
+            text-align: right;
+        }
+
+        .entry-sub {
+            font-size: 9.5px;
+            color: #555;
+            margin-bottom: 1px;
+        }
+
+        .entry ul {
+            margin-left: 16px;
+            margin-top: 2px;
+        }
+
+        .entry ul li {
+            margin-bottom: 2px;
+            font-size: 10.5px;
+        }
+
+        /* ───────────────────────────── Skills ─────────────────────────── */
+        .skill-pill {
+            background-color: #e8f0fe;
+            color: #1a73e8;
+            font-size: 9px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border: 1px solid #c5d9f7;
+            display: inline;
+            margin-right: 4px;
+            line-height: 2;
+        }
+
+        .skills-line {
+            font-size: 10.5px;
+        }
+
+        /* ───────────────────────────── Bullet lists ───────────────────── */
+        .bullet-list {
+            margin-left: 16px;
+        }
+
+        .bullet-list li {
+            margin-bottom: 2px;
+            font-size: 10.5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ════════════════════════ HEADER ════════════════════════ -->
+    <div class="header">
+        <h1>{{ name }}</h1>
+        {% if target_job %}
+            <div class="target-job">{{ target_job }}</div>
+        {% endif %}
+        <div class="contact-line">
+            {% set parts = [] %}
+            {% if email %}{% set _ = parts.append(email) %}{% endif %}
+            {% if phone %}{% set _ = parts.append(phone) %}{% endif %}
+            {% if linkedin %}{% set _ = parts.append(linkedin) %}{% endif %}
+            {% if github %}{% set _ = parts.append(github) %}{% endif %}
+            {{ parts | join(" &nbsp;|&nbsp; ") }}
+        </div>
+        {% if summary %}
+            <p class="summary">{{ summary }}</p>
+        {% endif %}
+    </div>
+
+    <!-- ════════════════════════ EDUCATION ═════════════════════ -->
+    {% if education %}
+    <div class="section">
+        <h2>Education</h2>
+        <p>{{ education }}</p>
+    </div>
+    {% endif %}
+
+    <!-- ════════════════════════ EXPERIENCE ════════════════════ -->
+    {% if experience %}
+    <div class="section">
+        <h2>Experience</h2>
+        {% for exp in experience %}
+        <div class="entry">
+            <table class="entry-row" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td class="title">{{ exp.role }}</td>
+                    {% if exp.duration %}
+                        <td class="meta">{{ exp.duration }}</td>
+                    {% endif %}
+                </tr>
+            </table>
+            {% if exp.company %}
+                <div class="entry-sub">{{ exp.company }}</div>
+            {% endif %}
+            {% if exp.points %}
+            <ul>
+                {% for point in exp.points %}
+                    <li>{{ point }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- ════════════════════════ INTERNSHIPS ═══════════════════ -->
+    {% if internships %}
+    <div class="section">
+        <h2>Internships</h2>
+        {% for intern in internships %}
+        <div class="entry">
+            <table class="entry-row" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td class="title">{{ intern.role }}</td>
+                    {% if intern.duration %}
+                        <td class="meta">{{ intern.duration }}</td>
+                    {% endif %}
+                </tr>
+            </table>
+            {% if intern.organization %}
+                <div class="entry-sub">{{ intern.organization }}</div>
+            {% endif %}
+            {% if intern.points %}
+            <ul>
+                {% for point in intern.points %}
+                    <li>{{ point }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- ════════════════════════ PROJECTS ══════════════════════ -->
+    {% if projects %}
+    <div class="section">
+        <h2>Projects</h2>
+        {% for proj in projects %}
+        <div class="entry">
+            <span class="title">{{ proj.title }}</span>
+            {% if proj.tech_stack %}
+                <span class="entry-sub"> — {{ proj.tech_stack }}</span>
+            {% endif %}
+            {% if proj.points %}
+            <ul>
+                {% for point in proj.points %}
+                    <li>{{ point }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- ════════════════════════ SKILLS ════════════════════════ -->
+    {% if skills %}
+    <div class="section">
+        <h2>Skills</h2>
+        <div>
+            {% for skill in skills %}
+                <span class="skill-pill">{{ skill }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- ════════════════════════ CERTIFICATIONS ════════════════ -->
+    {% if certifications %}
+    <div class="section">
+        <h2>Certifications</h2>
+        <ul class="bullet-list">
+            {% for cert in certifications %}
+                <li>{{ cert }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- ════════════════════════ ACHIEVEMENTS ══════════════════ -->
+    {% if achievements %}
+    <div class="section">
+        <h2>Achievements</h2>
+        <ul class="bullet-list">
+            {% for ach in achievements %}
+                <li>{{ ach }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- ════════════════════════ TOOLS ═════════════════════════ -->
+    {% if tools %}
+    <div class="section">
+        <h2>Tools</h2>
+        <div>
+            {% for tool in tools %}
+                <span class="skill-pill">{{ tool }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- ════════════════════ COMPETITIVE PROGRAMMING ═══════════ -->
+    {% if competitive_programming %}
+    <div class="section">
+        <h2>Competitive Programming</h2>
+        <ul class="bullet-list">
+            {% for cp in competitive_programming %}
+                <li>{{ cp }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- ════════════════════════ EXTRACURRICULARS ══════════════ -->
+    {% if extracurriculars %}
+    <div class="section">
+        <h2>Extracurriculars</h2>
+        <ul class="bullet-list">
+            {% for ec in extracurriculars %}
+                <li>{{ ec }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+</body>
+</html>
+
